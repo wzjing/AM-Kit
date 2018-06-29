@@ -1,0 +1,35 @@
+doctype html
+
+mixin oval
+  svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="30px", height="30px")
+    circle(cx="12" cy="12" r="12" fill="#009688")
+
+mixin play
+  svg.control-play(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="24px", height="24px")
+    polygon(points="4,4 20,12 4,20", stroke-linejoin="rect", stroke-width="3", stroke="#009688", fill="#009688")
+
+mixin reset
+  svg.control-reset.animation-control--hide(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="24px", height="24px")
+    path(d="M 20 12 A 8 8 0 1 1 12 4", stroke-width="2.6", stroke="#CC2F2F", fill="transparent", stroke-linecap="rect")
+    path(d="M 12 1 L 16 4 L 12 7 Z", stroke-linejoin="rect", stroke-width="1", stroke="#CC2F2F", fill="#CC2F2F")
+
+html(lang=en)
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(name="theme-color", content="#009688")
+    link(rel="stylesheet", href="./stylesheets/stylesheet.css")
+    script(type="module", src="./scripts/main.js")
+    title AM-Kit
+  body
+    .animation-player
+      .animation-layout
+        .animation-graph
+          canvas.graph-canvas(class="graph-canvas", width="500px", height="500px")
+        .animation-ground
+          .animation-object
+            +oval
+      .animation-control
+        +play
+        +reset
