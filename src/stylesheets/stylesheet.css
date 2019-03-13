@@ -1,7 +1,7 @@
 .animation-player {
 	display: block;
-	padding: 10px;
-	background: transparent;
+	padding: 10px 30px;
+	background-color: hsl(202, 100%, 78%);
 	min-height: 200px;
 	min-width: 500px;
 }
