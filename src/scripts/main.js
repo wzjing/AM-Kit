@@ -1,5 +1,7 @@
 import {AnimationPlayer} from './libs/AnimationPlayer.js'
-import {offsetX} from './libs/AnimationUtil.js'
+import {Color} from './libs/Color';
+import {Animation} from './libs/Animation';
+import './libs/AnimationUtil';
 
 // Test
 window.onload = () => {
@@ -17,9 +19,7 @@ window.onload = () => {
     //     console.log('Reset')
     // };
     let playerEl = document.querySelector('.animation-player');
-    console.log(`opacity: ${playerEl.property('opacity').get()}`);
-    console.log(`padding: ${playerEl.property('padding').get()}`);
-    console.log(`Margin: ${playerEl.property('margin').get()}`);
-    console.log(`Background-Color: ${playerEl.property('background-color')}`);
-
+    let anim = new Animation(playerEl, 'margin-left', 0, 100)
+    anim.duration = 1000;
+    anim.start();
 };

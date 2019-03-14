@@ -5,7 +5,7 @@
   "main": "webpack.config.js",
   "scripts": {
     "start": "webpack-dev-server --port 80 --content-base ./dist --colors",
-    "test": "make test"
+    "test": "mocha"
   },
   "keywords": [
     "animation",
@@ -19,6 +19,7 @@
     "gulp-connect": "^5.7.0",
     "gulp-pug": "^4.0.1",
     "gulp-watch": "^5.0.1",
-    "del": "^4.0.0"
+    "del": "^4.0.0",
+    "mocha": "^6.0.2"
   }
 }

@@ -1,5 +1,6 @@
-import Interpolator from './Interpolator.js';
-import * as AnimationUtil from './AnimationUtil';
+import './AnimationUtil';
+import * as Interpolator from './Interpolator.js';
+import {Color} from "./Color";
 
 class Animation {
     set interpolator(value) {
@@ -50,15 +51,29 @@ class Animation {
     }
 
     _nativeAnim() {
-        let current = 0;
-        let startTime = 0;
+        let current = this._startValue;
+        let startTime = Date.now();
+        let ratio;
+        let step = (time) => {
+            ratio = (time - startTime) / this._duration;
+            let prop = this._target.property(this._property);
+            if (ratio <= 1) {
+                if (prop.get().type === 'color') {
+                    current = Color.fromHex(this._startValue).mid(Color.fromHex(this._endValue), ratio);
+                } else {
+                    current = (this._endValue - this._startValue) * ratio;
+                }
+                prop.set(current);
+                requestAnimationFrame(step)
+            } else {
+                this._target.property(this._property).set(this._startValue);
+            }
+
+            this._listener(current, ratio);
+        };
         requestAnimationFrame((timestamp) => {
             startTime = timestamp;
-            ((time) => {
-                let ratio  = (time - startTime)/this._duration;
-                if () 
-                requestAnimationFrame(arguments.callee)
-            })(timestamp);
+            step(timestamp);
         })
     }
 
@@ -66,5 +81,8 @@ class Animation {
 
     }
 
+}
 
+export {
+    Animation
 }

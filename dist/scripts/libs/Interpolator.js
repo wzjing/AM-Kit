@@ -1,3 +1,8 @@
+/**
+ * Linear slope interpolator
+ * @param value			a ratio of time from [0, 1]
+ * @returns {number}	a ratio of value from [0, 1]
+ */
 function LinearInterpolator(value) {
 	return value
 }

@@ -1,49 +1,81 @@
+import {Color} from './Color'
+
 Element.prototype.property = property;
 
-function toHex(value) {
-    let temp = parseInt(value);
-    if(temp < 0xF) {
-        return `0${temp.toString(16)}`;
+function parseCssColor(cssColor) {
+    if (/rgba/.test(cssColor)) {
+        let rgba = cssColor.match(/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d+\.\d+)\)$/);
+        return Color(rgba[1], rgba[2], rgba[3], rgba[4]);
+    } else if (/rgb/.test(cssColor)) {
+        let rgb = cssColor.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        return Color(rgb[1], rgb[2], rgb[3], 1.0);
     } else {
-        return temp.toString(16);
+        return null;
     }
 }
 
-function cssColor(rgb) {
-    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-    return "#" +toHex(rgb[1]) + toHex(rgb[2]) + toHex(rgb[3]);
-}
-
 function isNumber(value) {
-    return parseFloat(value).toString() !== 'NaN';
+    return /^\d+$|^\d+\.\d+$/;
 }
 
 function isDimension(value) {
-    return value.search('px') !== -1;
+    return /^\d+px$/.test(value);
 }
 
 function isColor(value) {
-    let pattern = /^(rgb|rgba)\(.*\)$/;
-    let result = pattern.test(value);
-    return result !== null;
+    return /^(rgb|rgba)\(.*\)$/.test(value)
 }
 
 /** Basic Functions **/
 function property(propName) {
     let el = this;
     let prop = window.getComputedStyle(this, null).getPropertyValue(propName);
+    let type;
+    if (isNumber(prop)) {
+        type = 'number';
+    } else if (isDimension(prop)) {
+        type = 'dimension';
+    } else if (isColor(prop)) {
+        type = 'color';
+    } else {
+        type = 'unknown';
+    }
     return {
+        type,
         get() {
-            if (isNumber(prop)) {
-                return parseFloat(prop);
-            } else if (isColor(prop)) {
-                return prop;
-            } else {
-                return prop;
+            switch (type) {
+                case 'number':
+                    return parseFloat(prop);
+                case 'dimension':
+                    return parseFloat(prop.replace('px', ''));
+                case 'color':
+                    return parseCssColor(prop);
+                default:
+                    return prop;
             }
         },
         set(value) {
-            eval(`el.style['${propName}']='${value}px'`);
+            if (value.constructor.name === 'String') {
+                el.setProperty(propName, value);
+                return;
+            }
+            switch (type) {
+                case 'number':
+                    el.setProperty(propName, value);
+                    break;
+                case 'dimension':
+                    if (value.constructor.name === 'Number') {
+                        el.setProperty(propName, value + 'px');
+                    }
+                    break;
+                case 'color':
+                    if (value.constructor.name === 'Person') {
+                        el.setProperty(propName, value);
+                    }
+                    break;
+                default:
+                    break;
+            }
         },
         toString() {
             return prop;
@@ -75,28 +107,6 @@ function animateValue(target, value, time, step, interpolator, listener) {
     }, STAMP)
 }
 
-function animate(target, from, to) {
-
-}
-
-/** Extension Animation Functions */
-
-function offsetX(el, offset, time, interpolator, listener) {
-    let startLeft = el.iLeft();
-    animateValue(el, offset, time, value => {
-        el.iLeft(startLeft + value)
-    }, interpolator, listener)
-}
-
-function offsetY(el, offset, time, interpolator, listener) {
-    let startTop = el.iTop();
-    animateValue(el, offset, time, value => {
-        el.iTop(startTop + value)
-    }, interpolator, listener)
-}
-
 export {
     animateValue,
-    offsetX,
-    offsetY
 }

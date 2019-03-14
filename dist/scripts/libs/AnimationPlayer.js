@@ -1,4 +1,4 @@
-import {offsetX} from './AnimationKit.js'
+import {offsetX} from './AnimationUtil.js'
 import Interpolator from './Interpolator.js'
 
 class AnimationPlayer {
