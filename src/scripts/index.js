@@ -1,7 +1,4 @@
-import {AnimationPlayer} from './libs/AnimationPlayer.js'
-import {Color} from './libs/Color';
 import {Animation} from './libs/Animation';
-import './libs/AnimationUtil';
 
 // Test
 window.onload = () => {

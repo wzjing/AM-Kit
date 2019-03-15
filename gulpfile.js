@@ -1,52 +1,47 @@
 const gulp = require('gulp');
-const connect = require('gulp-connect');
 const pug = require('gulp-pug');
 const del = require('del');
-const watch = require('gulp-watch');
+const webpack = require('webpack');
+const webpackDevServer = require('webpack-dev-server');
+const webpackConfig = require('./webpack.config.js');
+const path = require('path');
 
 function copy() {
-    return gulp.src(['./src/**/*.css', './src/**/*.js'], {base: './src'})
-        .pipe(gulp.dest('./dist'))
-        .pipe(connect.reload());
+    return gulp.src(['./src/**/*.css'], {base: './src'})
+        .pipe(gulp.dest('./dist'));
 }
 
 function compilePug() {
     return gulp.src(['./src/**/*.pug'], {base: './src'})
         .pipe(pug({pretty: true}))
-        .pipe(gulp.dest('./dist'))
-        .pipe(connect.reload());
+        .pipe(gulp.dest('./dist'));
 }
 
 function clean() {
-    return del(['./dist/*'], {read: false, allowEmpty: true});
+    return del(['./dist/**', '!./dist']);
 }
 
-function server() {
-    return connect.server({
-        root: './dist',
-        host: '0.0.0.0',
-        port: 80,
-        debug: true,
-        livereload: true
-    });
+function run() {
+    console.log(`Mode: ${webpackConfig.mode}`);
+    return new Promise(resolve => {
+        new webpackDevServer(webpack(webpackConfig), {
+            publicPath: webpackConfig.output.publicPath,
+            contentBase: './dist',
+            stats: {
+                colors: true
+            }
+        }).listen('80', 'localhost', (err) => {
+            if (err) throw Error(err)
+        })
+    })
 }
 
-function watchPug() {
-    return watch('./src/**/*.pug', gulp.parallel(compilePug));
-}
-
-function watchJsCss() {
-    return watch(['./src/**/*.js', './src/**/*.css'], gulp.parallel(copy));
-}
-
-let build = gulp.series(clean, gulp.parallel(compilePug, copy), gulp.parallel(server, watchPug, watchJsCss));
+// let build = gulp.series(clean, gulp.parallel(compilePug, copy), gulp.parallel(server, watchPug, watchJsCss));
+let build = gulp.series(clean, gulp.parallel(compilePug, copy), run);
 
 exports.copy = copy;
 exports.compilePug = compilePug;
 exports.clean = clean;
-exports.server = server;
-exports.watchPug = watchPug;
-exports.watchJsCss = watchJsCss;
 
 exports.default = build;
 
