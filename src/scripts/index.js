@@ -1,4 +1,5 @@
 import {Animation} from './libs/Animation';
+import '../stylesheets/stylesheet.scss'
 
 // Test
 window.onload = () => {
