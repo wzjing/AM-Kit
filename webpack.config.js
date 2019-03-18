@@ -1,17 +1,30 @@
 const path = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtraPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-    entry: './src/scripts/index.js',
+    entry: {
+        index: './src/scripts/index.js',
+        pager: './src/scripts/pager.js'
+    },
     output: {
-        filename: 'scripts/main.js',
-        path: path.resolve(__dirname, 'public'),
-        publicPath: '/public/'
+        filename: 'scripts/[name].js',
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
     },
     plugins: [
-        new htmlWebpackPlugin({
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
             template: './src/index.pug',
-            filename: 'index.html'
+            chunks: ['index']
+        }),
+        new HtmlWebpackPlugin({
+            filename: "pager.html",
+            template: "./src/pager.pug",
+            chunks: ['pager']
+        }),
+        new MiniCssExtraPlugin({
+            filename: 'stylesheets/[name].css',
         })
     ],
     module: {
@@ -30,18 +43,12 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtraPlugin.loader,
                     'css-loader',
-                    'sass-loader']
+                    'sass-loader'
+                ]
             }
         ]
     },
-    devtool: 'source-map',
-    watch: true,
-    watchOptions: {
-        ignored: /node_modules/,
-        aggregateTimeout: 300,
-        poll: 1000
-    }
 };
 

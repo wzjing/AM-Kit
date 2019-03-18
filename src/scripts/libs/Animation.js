@@ -1,4 +1,6 @@
-import './AnimationUtil';
+import {getProperty, animateValue} from "./AnimationUtil";
+
+'./AnimationUtil';
 import * as Interpolator from './Interpolator.js';
 import {Color} from "./Color";
 
@@ -54,22 +56,30 @@ class Animation {
         let current = this._startValue;
         let startTime = Date.now();
         let ratio;
+        if (!this._interpolator) {
+            this._interpolator = value => value;
+        }
         let step = (time) => {
-            ratio = (time - startTime) / this._duration;
-            let prop = this._target.property(this._property);
+            ratio = this._interpolator((time - startTime) / this._duration);
+            let property = getProperty(this._target, this._property);
             if (ratio <= 1) {
-                if (prop.get().type === 'color') {
+                if (property.get().type === 'color') {
                     current = Color.fromHex(this._startValue).mid(Color.fromHex(this._endValue), ratio);
                 } else {
                     current = (this._endValue - this._startValue) * ratio;
                 }
-                prop.set(current);
-                requestAnimationFrame(step)
+                property.set(current);
+                requestAnimationFrame(step);
+                console.log(`Current: ${current.toFixed(2)}[${ratio.toFixed(2)}]`)
             } else {
-                this._target.property(this._property).set(this._startValue);
+                property.set(this._endValue);
+                requestAnimationFrame(t => {
+                });
+                console.log('Done');
             }
-
-            this._listener(current, ratio);
+            if (typeof this._listener === 'function') {
+                this._listener(current, ratio);
+            }
         };
         requestAnimationFrame((timestamp) => {
             startTime = timestamp;

@@ -1,5 +1,6 @@
-import {offsetX} from './AnimationUtil.js'
-import Interpolator from './Interpolator.js'
+import {Animation} from "./Animation";
+import {AcceleratedInterpolator} from './Interpolator.js'
+import {getProperty} from "./AnimationUtil";
 
 class AnimationPlayer {
 
@@ -147,7 +148,12 @@ class AnimationPlayer {
                 this.playProgress = value;
                 this.invalidate();
             };
-            offsetX(this.animationObjectEl_, 300, 500, Interpolator.DecceleratedInterpolator, this.animationListener_);
+            const start = getProperty(this.animationObjectEl_, 'left').get();
+            let anim = new Animation(this.animationObjectEl_, 'left', start, start+200);
+            anim.listener = (value, ratio) => this.animationListener_(ratio);
+            anim.duration = 300;
+            anim.interpolator = this.interpolator_;
+            anim.start();
         }
     }
 

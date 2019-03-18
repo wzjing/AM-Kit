@@ -21,8 +21,7 @@ function DeceleratedInterpolator(value) {
 	return (-0.11 / (value + 0.1) + 1.1) * value * value
 }
 
-// noinspection JSUnusedGlobalSymbols
-export default {
+export {
 	LinearInterpolator,
 	AcceleratedInterpolator,
 	DeceleratedInterpolator

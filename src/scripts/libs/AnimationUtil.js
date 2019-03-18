@@ -1,7 +1,5 @@
 import {Color} from './Color'
 
-Element.prototype.property = property;
-
 function parseCssColor(cssColor) {
     if (/rgba/.test(cssColor)) {
         let rgba = cssColor.match(/^rgba\((\d+),\s*(\d+),\s*(\d+),\s*(\d+\.\d+)\)$/);
@@ -15,7 +13,7 @@ function parseCssColor(cssColor) {
 }
 
 function isNumber(value) {
-    return /^\d+$|^\d+\.\d+$/;
+    return /^\d+$|^\d+\.\d+$/.test(value);
 }
 
 function isDimension(value) {
@@ -27,9 +25,8 @@ function isColor(value) {
 }
 
 /** Basic Functions **/
-function property(propName) {
-    let el = this;
-    let prop = window.getComputedStyle(this, null).getPropertyValue(propName);
+function getProperty(el, propName) {
+    let prop = window.getComputedStyle(el, null).getPropertyValue(propName);
     let type;
     if (isNumber(prop)) {
         type = 'number';
@@ -61,16 +58,16 @@ function property(propName) {
             }
             switch (type) {
                 case 'number':
-                    el.setProperty(propName, value);
+                    el.style.setProperty(propName, value);
                     break;
                 case 'dimension':
                     if (value.constructor.name === 'Number') {
-                        el.setProperty(propName, value + 'px');
+                        el.style.setProperty(propName, `${parseInt(value)}px`);
                     }
                     break;
                 case 'color':
                     if (value.constructor.name === 'Person') {
-                        el.setProperty(propName, value);
+                        el.style.setProperty(propName, value);
                     }
                     break;
                 default:
@@ -108,5 +105,6 @@ function animateValue(target, value, time, step, interpolator, listener) {
 }
 
 export {
+    getProperty,
     animateValue,
 }
