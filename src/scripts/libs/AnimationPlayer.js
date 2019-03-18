@@ -1,6 +1,4 @@
 import {Animation} from "./Animation";
-import {AcceleratedInterpolator} from './Interpolator.js'
-import {getProperty} from "./AnimationUtil";
 
 class AnimationPlayer {
 
