@@ -1,4 +1,4 @@
-import {Animation} from "./Animation";
+import {Animation, getProperty} from "./animation";
 
 class AnimationPlayer {
 
@@ -147,11 +147,11 @@ class AnimationPlayer {
                 this.invalidate();
             };
             const start = getProperty(this.animationObjectEl_, 'left').get();
-            let anim = new Animation(this.animationObjectEl_, 'left', start, start+200);
-            anim.listener = (value, ratio) => this.animationListener_(ratio);
-            anim.duration = 300;
-            anim.interpolator = this.interpolator_;
-            anim.start();
+            this._anim = new Animation(this.animationObjectEl_, 'left', start, start+200);
+            this._anim.listener = (value, ratio) => this.animationListener_(ratio);
+            this._anim.duration = 300;
+            this._anim.interpolator = this.interpolator_;
+            this._anim.start();
         }
     }
 
@@ -168,7 +168,7 @@ class AnimationPlayer {
     resetAnimation() {
         this.stopAnimation();
         if (this.animationObjectEl_) {
-            this.animationObjectEl_.style.left = '';
+            if (this._anim) this._anim.reset();
             this.playProgress = 0;
             this.invalidate();
         }

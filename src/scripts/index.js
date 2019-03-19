@@ -1,5 +1,5 @@
 import {AnimationPlayer} from "./libs/AnimationPlayer";
-import {AcceleratedInterpolator} from "./libs/Interpolator";
+import {AcceleratedInterpolator} from "./libs/interpolators";
 import '../stylesheets/stylesheet.scss'
 
 // Test
