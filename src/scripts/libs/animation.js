@@ -15,6 +15,7 @@ function isNumber(value) {
 }
 
 function isDimension(value) {
+    Math.sin(Math.PI*value)
     return /^\d+px$/.test(value);
 }
 
