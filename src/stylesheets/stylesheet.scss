@@ -1,12 +1,75 @@
+$gap-size: 16px;
+
+@mixin corner {
+  border-radius: 4px;
+  @media screen and (min-width: 1280px) {
+    border-radius: 6px;
+  }
+}
+
+html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
 body {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
   background-color: #F8F8F8;
+
+}
+
+.content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  padding: 36px 32px;
+}
+
+.sub-layout {
+  margin-left: $gap-size/2;
+  flex: 1 0 300px;
+  display: flex;
+  flex-direction: column;
 }
 
 .card{
+  @include corner;
   background-color: #FFFFFF;
   border-style: none;
-  border-radius: 12px;
   box-sizing: border-box;
-  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
-  padding: 12px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
+
+  &#editor {
+    margin-right: $gap-size/2;
+    flex: 2 0 500px;
+  }
+
+  &#graph {
+    margin-bottom: $gap-size/2;
+    flex: 1 1 auto;
+  }
+
+  &#animation {
+    margin-top: $gap-size/2;
+    flex: 1 1 auto;
+  }
+}
+
+.editor-title-bar {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  min-height: 48px;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.code-editor {
+  margin-top: 10px;
+  width: 100%;
 }

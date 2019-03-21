@@ -4,8 +4,8 @@ const MiniCssExtraPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     entry: {
-        index: './src/scripts/index.js',
-        pager: './src/scripts/pager.js'
+        index: ['./src/scripts/index.js'],
+        pager: './src/scripts/pager.js',
     },
     output: {
         filename: 'scripts/[name].js',
@@ -45,7 +45,19 @@ module.exports = {
                 use: [
                     MiniCssExtraPlugin.loader,
                     'css-loader',
-                    'sass-loader'
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            includePaths: ['']
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    MiniCssExtraPlugin.loader,
+                    'css-loader'
                 ]
             }
         ]
