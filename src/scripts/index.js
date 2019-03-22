@@ -1,12 +1,23 @@
-import {Animation, Color} from './lib/animation';
 import '../stylesheets/stylesheet.scss'
+import * as monaco from 'monaco-editor';
 
-let CodeMirror = require('codemirror');
+self.MonacoEnvironment = {
+    getWorkerUrl: function (moduleId, label) {
+        if (label === 'typescript' || label === 'javascript') {
+            return './ts.worker.bundle.js';
+        }
+        return './editor.worker.bundle.js';
+    }
+};
 
 // Test
 window.onload = () => {
-    let editor = CodeMirror(document.querySelector('.code-editor'), {
-        value: "function myScript(){return 100;}\n",
-        mode:  "javascript"
+    monaco.editor.create(document.querySelector('.code-editor'), {
+        value: [
+            'function x() {',
+            '\tconsole.log("Hello world!");',
+            '}'
+        ].join('\n'),
+        language: 'javascript'
     });
 };

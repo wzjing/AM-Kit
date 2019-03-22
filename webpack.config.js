@@ -6,8 +6,11 @@ module.exports = {
     entry: {
         index: ['./src/scripts/index.js'],
         pager: './src/scripts/pager.js',
+        "editor.worker": 'monaco-editor/esm/vs/editor/editor.worker.js',
+        "ts.worker": 'monaco-editor/esm/vs/language/typescript/ts.worker'
     },
     output: {
+        globalObject: "self",
         filename: 'scripts/[name].js',
         path: path.resolve(__dirname, 'dist'),
         publicPath: '/'
@@ -48,7 +51,6 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            includePaths: ['']
                         }
                     }
                 ]
@@ -56,7 +58,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    MiniCssExtraPlugin.loader,
+                    'style-loader',
                     'css-loader'
                 ]
             }
