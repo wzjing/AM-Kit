@@ -38,14 +38,16 @@ body {
   flex-direction: column;
 }
 
-.card{
+.card {
   @include corner;
   background-color: #FFFFFF;
   border-style: none;
   box-sizing: border-box;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
 
-  &#editor {
+  &#code {
+    display: flex;
+    flex-direction: column;
     margin-right: $gap-size/2;
     flex: 2 0 500px;
   }
@@ -62,14 +64,33 @@ body {
 }
 
 .editor-title-bar {
+  flex: 0 1 48px;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  min-height: 48px;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
 }
 
+.editor-title {
+  flex: 0 0 auto;
+  display: inline-block;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  border-color: #8F8F8F;
+  color: #8F8F8F;
+  height: 20px;
+  line-height: 20px;
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
 .code-editor {
-  margin-top: 10px;
-  width: 100%;
+  flex: 1 1 auto;
 }

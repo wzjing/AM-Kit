@@ -1,18 +1,5 @@
 doctype html
 
-mixin oval
-  svg(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="30px", height="30px")
-    circle(cx="12" cy="12" r="12" fill="#009688")
-
-mixin play
-  svg.control-play(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="24px", height="24px")
-    polygon(points="4,4 20,12 4,20", stroke-linejoin="rect", stroke-width="3", stroke="#009688", fill="#009688")
-
-mixin reset
-  svg.control-reset.animation-control--hide(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="24px", height="24px")
-    path(d="M 20 12 A 8 8 0 1 1 12 4", stroke-width="2.6", stroke="#CC2F2F", fill="transparent", stroke-linecap="rect")
-    path(d="M 12 1 L 16 4 L 12 7 Z", stroke-linejoin="rect", stroke-width="1", stroke="#CC2F2F", fill="#CC2F2F")
-
 html(lang=en)
   head
     meta(charset="UTF-8")
@@ -22,10 +9,19 @@ html(lang=en)
     title AM-Kit
   body
     .content
-      .card#editor
+      .card#code
         .editor-title-bar
-          | Card
-        .code-editor
+          .editor-title Code
+          .editor-run
+            svg.control-reset.animation-control--hide(xmlns="http://www.w3.org/2000/svg", viewBox="0 0 24 24", width="24px", height="24px")
+              defs
+                linearGradient(id="grad1", x1="0%", y1="0%", x2="100%", y2="0%")
+                  stop(offset="0%", style="stop-color:rgb();stop-opacity:1")
+                  stop(offset="100%", style="stop-color:rgb();stop-opacity:1")
+              polygon(points="4,4 20,12 4,20", stroke-width="2.6", fill="#00CB94", stroke-linecap="round", stroke-linejoin="round")
+
+        .code-editor#editor
+        //#editor
       .sub-layout
         .card#graph
           | Graph
