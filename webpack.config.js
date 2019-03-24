@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtraPlugin = require('mini-css-extract-plugin');
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -19,15 +18,13 @@ module.exports = {
             template: './src/index.pug',
             chunks: ['index']
         }),
-        new MonacoWebpackPlugin({
-            languages: ['javascript']
+        new MiniCssExtraPlugin({
+            filename: 'stylesheets/[name].css',
         })
     ],
     resolve: {
         alias: {
-            // "vs/basic-languages/src": path.resolve(__dirname, 'node_modules/monaco-languages/release'),
-            vs: path.resolve(__dirname, 'vscode')
-            // vs: path.resolve(__dirname, 'node_modules/monaco-editor/dev/vs')
+            '@': './node_modules'
         },
         extensions: ['.js', '.css']
     },
@@ -50,7 +47,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtraPlugin.loader,
                     'css-loader',
                     {
                         loader: 'sass-loader',
@@ -61,7 +58,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtraPlugin.loader,
                     'css-loader'
                 ]
             }

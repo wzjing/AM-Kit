@@ -1,12 +1,12 @@
 import '../stylesheets/stylesheet.scss';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/dracula.css';
 
-import * as monaco from 'monaco-editor';
+import 'codemirror/mode/javascript/javascript.js'
+import CodeMirror from 'codemirror/lib/codemirror.js';
 
-monaco.editor.create(document.getElementById('editor'), {
-    value: [
-        'function x() {',
-        '\tconsole.log("Hello world!");',
-        '}'
-    ].join('\n'),
-    language: 'javascript'
+let editor = CodeMirror.fromTextArea(document.querySelector('#editor'), {
+    mode: 'javascript',
+    theme: 'dracula'
 });
+
