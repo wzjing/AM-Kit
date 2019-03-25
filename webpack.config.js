@@ -61,6 +61,14 @@ module.exports = {
                     MiniCssExtraPlugin.loader,
                     'css-loader'
                 ]
+            },
+            {
+                test: /\.(png|jpg)$/,
+                use: 'url-loader'
+            },
+            {
+                test: /\.svg$/,
+                use: 'svg-inline-loader'
             }
         ]
     },

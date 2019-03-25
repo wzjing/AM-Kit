@@ -1,4 +1,4 @@
-$gap-size: 16px;
+$gap-size: 48px;
 
 @mixin corner {
   border-radius: 4px;
@@ -28,7 +28,7 @@ body {
   flex: 1 1 auto;
   display: flex;
   flex-direction: row;
-  padding: 36px 32px;
+  padding: 48px 64px;
 }
 
 .sub-layout {
@@ -46,6 +46,7 @@ body {
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.12);
 
   &#code {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin-right: $gap-size/2;
@@ -64,6 +65,7 @@ body {
 }
 
 .editor-title-bar {
+  float: top;
   flex: 0 1 48px;
   padding: 0 12px;
   display: flex;
@@ -86,11 +88,21 @@ body {
   height: 20px;
   line-height: 20px;
   padding: 0 8px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   text-align: center;
 }
 
-.code-editor {
+.editor-menu {
+  flex: 1 1 auto;
+}
+
+.editor-run {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.editor {
   flex: 1 1 auto;
 }
