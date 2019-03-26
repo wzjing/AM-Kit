@@ -9,16 +9,16 @@ html(lang=en)
     title AM-Kit
   body
     .content
-      .card#code
-        .editor-title-bar
-          .editor-title Interpolator
-          .editor-menu
-          .editor-run
+      .card#code-editor-layout
+        .code-editor-title-bar
+          .code-editor-title Interpolator
+          .code-editor-menu
+          .code-editor-run
             .icon-play
         textarea.code-editor#editor
       .sub-layout
-        .card#graph
-          | Graph
-        .card#animation
+        .card#graph-editor-layout
+          canvas.graph-editor#graph Not support Canvas
+        .card#animation-layout
           | Animation
 
