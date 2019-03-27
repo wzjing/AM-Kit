@@ -1,0 +1,39 @@
+$name: 'infinity';
+
+@font-face {
+  font-family: "regular";
+  src: url("../assets/fonts/FiraCode-Regular.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "bold";
+  src: url("../assets/fonts/FiraCode-Bold.ttf");
+  font-weight: bold;
+}
+
+.cm-s-#{$name}.CodeMirror, .cm-s-#{$name} .CodeMirror-gutters {
+  height: 100%;
+  font-family: regular, Serif, monospace;
+  font-size: 14px;
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border: none;
+}
+
+.cm-s-#{$name} span.cm-comment { color: #9b989e; }
+.cm-s-#{$name} span.cm-string, .cm-s-#{$name} span.cm-string-2 { color: #00dd8e; }
+.cm-s-#{$name} span.cm-number { color: black; }
+.cm-s-#{$name} span.cm-variable { color: #5D00FF; }
+.cm-s-#{$name} span.cm-variable-2 { color: black; }
+.cm-s-#{$name} span.cm-def { color: #000000; }
+.cm-s-#{$name} span.cm-operator { color: #0e07ff; }
+.cm-s-#{$name} span.cm-keyword { color: #2a62fe; }
+.cm-s-#{$name} span.cm-atom { color: #bd93f9; }
+.cm-s-#{$name} span.cm-meta { color: #f8f8f2; }
+.cm-s-#{$name} span.cm-tag { color: #ff79c6; }
+.cm-s-#{$name} span.cm-attribute { color: #5D00FF; }
+.cm-s-#{$name} span.cm-qualifier { color: #1d9cfa; }
+.cm-s-#{$name} span.cm-property { color: #E57A00; }
+.cm-s-#{$name} span.cm-builtin { color: #5D00FF; }
+.cm-s-#{$name} span.cm-variable-3, .cm-s-#{$name} span.cm-type { color: #ffb86c; }

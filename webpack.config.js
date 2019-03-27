@@ -69,6 +69,18 @@ module.exports = {
             {
                 test: /\.svg$/,
                 use: 'svg-inline-loader'
+            },
+            {
+                test: /\.(eot|ttf)$/,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            publicPath: 'fonts/',
+                            outputPath: 'fonts'
+                        }
+                    }
+                ]
             }
         ]
     },
