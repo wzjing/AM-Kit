@@ -12,15 +12,6 @@ $name: 'infinity';
   font-weight: bold;
 }
 
-.cm-s-#{$name}.CodeMirror, .cm-s-#{$name} .CodeMirror-gutters {
-  height: 100%;
-  font-family: regular, Serif, monospace;
-  font-size: 14px;
-  background-color: #FFFFFF !important;
-  color: #000000 !important;
-  border: none;
-}
-
 .cm-s-#{$name} span.cm-comment { color: #9b989e; }
 .cm-s-#{$name} span.cm-string, .cm-s-#{$name} span.cm-string-2 { color: #00dd8e; }
 .cm-s-#{$name} span.cm-number { color: black; }
@@ -37,3 +28,21 @@ $name: 'infinity';
 .cm-s-#{$name} span.cm-property { color: #E57A00; }
 .cm-s-#{$name} span.cm-builtin { color: #5D00FF; }
 .cm-s-#{$name} span.cm-variable-3, .cm-s-#{$name} span.cm-type { color: #ffb86c; }
+
+.cm-s-#{$name}  { font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;}
+
+
+.cm-s-#{$name} .CodeMirror-matchingbracket {
+  outline:1px solid grey; color:black !important;
+}
+
+.CodeMirror-hints.#{$name} {
+  font-family: regular, Menlo, monospace;
+  color: #616569;
+  background-color: #ebf3fd !important;
+}
+
+.CodeMirror-hints.#{$name} .CodeMirror-hint-active {
+  background-color: #a2b8c9 !important;
+  color: #5c6065 !important;
+}
