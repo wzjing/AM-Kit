@@ -3,8 +3,10 @@ import 'codemirror/theme/idea.css';
 import '../stylesheets/index.scss';
 import '../stylesheets/editor.scss'
 
-import iconRun from '../assets/img/run.svg'
-import 'codemirror/mode/javascript/javascript.js'
+import iconRun from '../assets/img/run.svg';
+import iconOval from '../assets/img/oval.svg';
+import iconTriangle from '../assets/img/triangle.svg';
+import 'codemirror/mode/javascript/javascript.js';
 import CodeMirror from 'codemirror/lib/codemirror.js';
 import {getProperty} from "./lib/animation";
 
@@ -88,5 +90,8 @@ window.onload = () => {
     document.querySelector('.code-editor-run').addEventListener('click', () => {
         run();
     });
+    document.querySelector('.icon-oval').innerHTML = iconOval;
+    document.querySelector('.icon-triangle').innerHTML = iconTriangle;
+    document.querySelector('#shape-triangle').setAttribute('transform', 'rotate(12, 12, 30)');
 };
 
